@@ -1,0 +1,224 @@
+{% extends 'homebase.html.twig' %}
+
+{% block title %}{{ car.title }}  {% endblock %}
+{% block keywords %}{{ car.keywords }}  {% endblock %}
+{% block description %}{{ car.description }}  {% endblock %}
+
+{% block body %}
+
+
+    <section id="subintro">
+        <div class="jumbotron subhead" id="overview">
+            <div class="container">
+                <div class="row">
+                    <div class="span12">
+                        <div class="centered">
+                            <h3>CAR DETAIL</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="maincontent">
+        <div class="container">
+            <div class="row">
+
+                <div class="span5">
+
+                    <div id="slider_holder">
+                        <!-- slider navigation -->
+                        <div class="sequence-nav" >
+                            <div class="prev">
+                                <span></span>
+                            </div>
+                            <div class="next">
+                                <span></span>
+                            </div>
+                        </div>
+                        <!-- end slider navigation -->
+                        <div id="sequence">
+                            <ul>
+
+                                <li>
+                                    <a  class="zoom" data-pretty="prettyPhoto" href="{{ asset('uploads/images/'~car.image) }}">
+                                        <img class="slider_img animate-in" src="{{ asset('uploads/images/'~car.image) }}" alt="">
+                                    </a>
+
+                                </li>
+
+                                {% for rs in images %}
+                                    <!-- Layer 1 -->
+                                    <li>
+                                        <a class="zoom" data-pretty="prettyPhoto" href="{{ asset('uploads/images/'~rs.image) }}">
+                                            <img class="slider_img animate-in" src="{{ asset('uploads/images/'~rs.image) }}" alt="">
+                                        </a>
+
+                                    </li>
+                                {% endfor %}
+
+                            </ul>
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+
+
+                <div class="span7">
+                    <!-- start article 1 -->
+                    <article class="blog-post">
+                        <div class="post-heading">
+                            <h3>{{ car.title }}</h3>
+                        </div>
+
+                        <div class="row">
+
+                            <div class="span7">
+                                <table class="table">
+                                    <tbody>
+                                    <tr>
+                                        <th>Description</th>
+                                        <td>{{ car.description }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Type</th>
+                                        <td>{{ car.type }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Marka</th>
+                                        <td>{{ car.marka }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Fuel_type</th>
+                                        <td>{{ car.fuelType }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Gear_shape</th>
+                                        <td>{{ car.gearShape }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Model_year</th>
+                                        <td>{{ car.modelYear }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Km</th>
+                                        <td>{{ car.km }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Price</th>
+                                        <td>{{ car.price }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>City</th>
+                                        <td>{{ car.city }}</td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                        </div>
+
+                    </article>
+
+                </div>
+            </div>
+
+
+            <div class="row">
+                <div class="span12" id="accordion2">
+                    <div class="accordion-group">
+                        <div class="accordion-heading">
+                            <a class="accordion-toggle active" data-toggle="collapse" data-parent="#accordion2" href="#collapseOne">
+                                <i class="icon-minus"></i>Cars & Price</a>
+                        </div>
+                        <div id="collapseOne" class="accordion-body in collapse" style="height: auto;">
+                            <div class="accordion-inner">
+                                Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird
+                                on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table,
+                                raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-group">
+                        <div class="accordion-heading">
+                            <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseTwo">
+                                <i class="icon-plus"></i> Car Detail Information</a>
+                        </div>
+                        <div id="collapseTwo" class="accordion-body collapse" style="height: 0px;">
+                            <div class="accordion-inner">
+                                {{ car.detail |raw }}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-group">
+                        <div class="accordion-heading">
+                            <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseThree">
+                                <i class="icon-plus"></i> Comments</a>
+                        </div>
+                        <div id="collapseThree" class="accordion-body collapse" style="height: 0px;">
+                            <div class="accordion-inner">
+                                {% for rs in comments %}
+                                    <h5>{{ rs.subject }} [Rate:{{ rs.rate }}] </h5>
+                                    <p>{{ rs.comment }}</p>
+                                    <hr>
+                                {% endfor %}
+
+
+                                {% if app.user %}
+                                    {{ include('messages.html.twig') }}
+
+                                    <form name="comment" method="post" role="form" class="contactForm" action="{{ path('user_new_comment',{'id':car.id}) }}">
+                                        <div class="row" >
+                                            <h3 style="margin-left: 30px">Write Your Comment</h3>
+
+                                            <div class="span4 form-group" >
+                                                <input type="text" class="input-block-level" id="comment_subject" name="comment[subject]" placeholder="Subject" data-rule="minlen:4"
+                                                       data-msg="Please enter at least 8 chars of subject" />
+                                                <div class="validation"></div>
+                                            </div>
+
+                                            <div class="span2 form-group" >
+                                                <select id="comment_rate" name="comment[rate]" class="input-block-level">
+                                                    <option>1</option>
+                                                    <option>2</option>
+                                                    <option>3</option>
+                                                    <option>4</option>
+                                                    <option>5</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="row" >
+                                            <div class="span6 form-group">
+                <textarea class="form-control" id="comment_comment" name="comment[comment]" maxlength="255" rows="5" data-rule="required" data-msg="Please write something for us"
+                          placeholder="Comment"></textarea>
+                                                <div class="validation"></div>
+                                                <div class="text-center">
+                                                    <input type="hidden"  name="token" value="{{ csrf_token('comment') }}" />
+                                                    <button class="btn btn-color btn-rounded" type="submit">Send Comment</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                {% else %}
+                                    <li>
+                                        <a href="/loginuser"><i class="icon-lock"></i> Yorum Yapabilmek için Lütfen Login Olunuz </a>
+                                    </li>
+                                {% endif %}
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </section>
+
+{% endblock %}
+
+

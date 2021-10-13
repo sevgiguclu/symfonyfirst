@@ -1,0 +1,24 @@
+{% extends 'adminbase.html.twig' %}
+
+{% block title %}New Car{% endblock %}
+
+{% block body %}
+<!-- ============================================================== -->
+<!-- wrapper  -->
+<!-- ============================================================== -->
+<div class="dashboard-wrapper">
+    <div class="container-fluid dashboard-content">
+        <div class="row">
+            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                <h3 class="text-center">
+                    <h1>Create New Car</h1>
+
+                    {{ include('admin/car/_form.html.twig') }}
+
+                    <a href="{{ path('admin_car_index') }}" class="btn btn-rounded btn-dark">back to list</a>
+                </h3>
+            </div>
+        </div>
+    </div>
+    <!-- ============================================================== -->
+    {% endblock %}

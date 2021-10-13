@@ -1,0 +1,113 @@
+{% extends 'homebase.html.twig' %}
+
+{% block title %}{{ setting[0].title }} {% endblock %}
+{% block keywords %}{{ setting[0].keywords }}{% endblock %}
+{% block description %}{{ setting[0].description }}{% endblock %}
+
+  {% block slider %}{% include('home/slider.html.twig') %}{% endblock %}
+{% block body %}
+    <section id="maincontent">
+        <div class="container">
+            <div class="row">
+                <div class="span3 features">
+                    <i class="icon-circled icon-32 icon-suitcase left active"></i>
+                    <h4>Responsive bootstrap</h4>
+                    <div class="dotted_line">
+                    </div>
+                    <p class="left">
+                        Dolorem adipiscing definiebas ut nec. Dolore consectetuer eu vim, elit molestie ei has, petentium imperdiet in pri mel virtute nam.
+                    </p>
+                    <a href="#">Learn more</a>
+                </div>
+                <div class="span3 features">
+                    <i class="icon-circled icon-32 icon-plane left"></i>
+                    <h4>Lot of features</h4>
+                    <div class="dotted_line">
+                    </div>
+                    <p class="left">
+                        Dolorem adipiscing definiebas ut nec. Dolore consectetuer eu vim, elit molestie ei has, petentium imperdiet in pri mel virtute nam.
+                    </p>
+                    <a href="#">Learn more</a>
+                </div>
+                <div class="span3 features">
+                    <i class="icon-circled icon-32 icon-leaf left"></i>
+                    <h4>Multipurpose template</h4>
+                    <div class="dotted_line">
+                    </div>
+                    <p class="left">
+                        Dolorem adipiscing definiebas ut nec. Dolore consectetuer eu vim, elit molestie ei has, petentium imperdiet in pri mel virtute nam.
+                    </p>
+                    <a href="#">Learn more</a>
+                </div>
+                <div class="span3 features">
+                    <i class="icon-circled icon-32 icon-wrench left"></i>
+                    <h4>With latest technology</h4>
+                    <div class="dotted_line">
+                    </div>
+                    <p class="left">
+                        Dolorem adipiscing definiebas ut nec. Dolore consectetuer eu vim, elit molestie ei has, petentium imperdiet in pri mel virtute nam.
+                    </p>
+                    <a href="#">Learn more</a>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="home-posts">
+                    <div class="span12">
+                        <h3>Recent blog posts</h3>
+                    </div>
+
+                    {% for rs in cars %}
+                    <div class="span3">
+                        <div class="post-image">
+                            <a href="{{ path('car_show', {'id': rs.id}) }}">
+                                <img src="{{ asset('uploads/images/'~rs.image) }}" alt="" style="height: 200px; width: 300px;">
+                            </a>
+                        </div>
+                        <!-- end .entry-meta -->
+                        <div class="body">
+                            <a href="{{ path('car_show', {'id': rs.id}) }}">
+                                <h5 class="title">{{ rs.title }}</h5>
+                            </a>
+                            <p>
+                                {{ rs.keywords }}
+                            </p>
+                        </div>
+                        <!-- end .entry-body -->
+                        <div class="clear">
+                        </div>
+                    </div>
+                    {% endfor %}
+
+
+
+                    <div class="span3">
+
+                        <div class="post-slider">
+
+                            <!-- start flexslider -->
+                            <div class="flexslider">
+
+                                <ul class="slides">
+                                    {% for rs in newCars %}
+                                    <li>
+                                        <a href="{{ path('car_show', {'id': rs.id}) }}"><img src="{{ asset('uploads/images/'~rs.image) }}" alt=""></a>
+                                    </li>
+                                    {% endfor %}
+                                </ul>
+
+                            </div>
+                            <!-- end flexslider -->
+                        </div>
+
+
+                    </div>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}
+

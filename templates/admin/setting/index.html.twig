@@ -1,0 +1,56 @@
+{% extends 'adminbase.html.twig' %}
+
+{% block title %}Setting index{% endblock %}
+
+{% block body %}
+<!-- ============================================================== -->
+<!-- wrapper  -->
+<!-- ============================================================== -->
+<div class="dashboard-wrapper">
+    <div class="container-fluid dashboard-content">
+        <div class="row">
+            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                <h3 class="text-center">
+                    <h1>Setting Page</h1>
+                    <a href="{{ path('admin_setting_new') }}" class="btn btn-rounded btn-dark">Create new</a>
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>Title</th>
+
+                            <th>Company</th>
+
+                            <th>Status</th>
+                            <th></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for setting in settings %}
+                            <tr>
+                                <td>{{ setting.id }}</td>
+                                <td>{{ setting.title }}</td>
+
+                                <td>{{ setting.company }}</td>
+
+                                <td>{{ setting.status }}</td>
+                                <td>
+                                    <a href="{{ path('admin_setting_show', {'id': setting.id}) }}" class="btn btn-rounded btn-dark">show</a>
+                                    <a href="{{ path('admin_setting_edit', {'id': setting.id}) }}" class="btn btn-rounded btn-dark">edit</a>
+                                </td>
+                            </tr>
+                        {% else %}
+                            <tr>
+                                <td colspan="21">no records found</td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+
+
+                </h3>
+            </div>
+        </div>
+    </div>
+    <!-- ============================================================== -->
+    {% endblock %}

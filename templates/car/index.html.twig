@@ -1,0 +1,100 @@
+{% extends 'homebase.html.twig' %}
+
+{% block title %}{{ app.user.name }} Profile {% endblock %}
+
+{% block body %}
+
+    <SCRIPT language="JavaScript" type="text/javascript">
+        function openWin(windowURL,windowName,windowFeatures) {
+            window.open(windowURL,windowName,windowFeatures);
+        }
+    </SCRIPT>
+
+<section id="subintro">
+    <div class="jumbotron subhead" id="overview">
+        <div class="container">
+            <div class="row">
+                <div class="span12">
+                    <div class="centered">
+                        <h3>USER CARS</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+<section id="maincontent">
+    <div class="container">
+        <div class="row">
+            {{ include('user/usermenu.html.twig') }}
+            <div class="span8">
+                <!-- start article 1 -->
+                <article class="blog-post">
+                    <div class="post-heading">
+                        <h3>User Car List</h3>
+                    </div>
+                    <div class="row">
+                        <div class="span8">
+
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Title</th>
+                <th>Image</th>
+                <th>Type</th>
+                <th>Marka</th>
+                <th>Fuel_type</th>
+                <th>Gear_shape</th>
+                <th>Model_year</th>
+                <th>City</th>
+                <th>I.Gallery</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for car in cars %}
+            <tr>
+                <td>{{ car.id }}</td>
+                <td>{{ car.title }}</td>
+                <td> <img src="{{ asset('uploads/images/'~car.image) }}" height="40"> </td>
+                <td>{{ car.type }}</td>
+                <td>{{ car.marka }}</td>
+                <td>{{ car.fuelType }}</td>
+                <td>{{ car.gearShape }}</td>
+                <td>{{ car.modelYear }}</td>
+                <td>{{ car.city }}</td>
+                <td>
+                    <a href="javascript:openWin('{{ path('user_image_new',{'id':car.id}) }}','','toolbar=no,location=no,directories=0,status=0,top=50,left=100,menuBar=no,scrollBars=yes,resizable=no,width=900,height=600');">
+                        <img src="{{ asset('assets/admin/img') }}/gallery.jpg" height="40">
+                    </a>
+                </td>
+                <td>
+                    <a href="{{ path('user_car_show', {'id': car.id}) }}">show</a>
+                    <a href="{{ path('user_car_edit', {'id': car.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="19">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('user_car_new') }}">Create new</a>
+
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock %}
+

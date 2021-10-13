@@ -1,0 +1,86 @@
+{% extends 'adminbase.html.twig' %}
+
+{% block title %}Car List{% endblock %}
+
+{% block body %}
+
+    <SCRIPT language="JavaScript" type="text/javascript">
+        function openWin(windowURL,windowName,windowFeatures) {
+            window.open(windowURL,windowName,windowFeatures);
+        }
+    </SCRIPT>
+
+    <!-- ============================================================== -->
+    <!-- wrapper  -->
+    <!-- ============================================================== -->
+    <div class="dashboard-wrapper">
+        <div class="container-fluid dashboard-content">
+            <div class="row">
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                    <h3 class="text-center">
+                        <h1>Car List</h1>
+                        <a href="{{ path('admin_car_new') }}" class="btn btn-rounded btn-dark">Create new</a>
+                        <table class="table table-striped">
+                            <thead>
+                            <tr>
+                                <th>Id</th>
+                                <th>Category</th>
+                                <th>Title</th>
+                                <th>Image</th>
+                                <th>Type</th>
+                                <th>Marka</th>
+                                <th>City</th>
+                                <th>User</th>
+                                <th>I.Gallery</th>
+                                <th>Advertisement</th>
+                                <th>Status</th>
+                                <th></th>
+                                <th></th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for car in cars %}
+                                <tr>
+                                    <td>{{ car.id }}</td>
+                                    <td>{{ car.catname }}</td>
+                                    <td>{{ car.title }}</td>
+                                    <td> <img src="{{ asset('uploads/images/'~car.image) }}" height="40"> </td>
+                                    <td>{{ car.type }}</td>
+                                    <td>{{ car.marka }}</td>
+                                    <td>{{ car.city }}</td>
+                                    <td nowrap=""><a href="{{ path('admin_user_show', {'id': car.userid}) }}">{{ car.name }} {{ car.surname }}</td></a>
+                                    <td>
+                                        <a href="javascript:openWin('{{ path('admin_image_new',{'id':car.id}) }}','','toolbar=no,location=no,directories=0,status=0,top=50,left=100,menuBar=no,scrollBars=yes,resizable=no,width=900,height=600');">
+                                            <img src="{{ asset('assets/admin/img') }}/gallery.jpg" height="40"  title="Image Gallery">
+                                        </a>
+                                    </td>
+                                    <td>
+                                        <a href="javascript:openWin('{{ path('admin_advertisement_new',{'id':car.id}) }}','','toolbar=no,location=no,directories=0,status=0,top=50,left=100,menuBar=no,scrollBars=yes,resizable=no,width=900,height=600');">
+                                            <img src="{{ asset('assets/admin/img') }}/advertisements.png" height="40" title="Advertisements">
+                                        </a>
+                                    </td>
+                                    <td>{{ car.status }}</td>
+
+                                    <td>
+                                        <a href="{{ path('admin_car_show', {'id': car.id}) }}" class="btn btn-rounded btn-dark">show</a>
+                                    </td>
+                                    <td>
+                                        <a href="{{ path('admin_car_edit', {'id': car.id}) }}" class="btn btn-rounded btn-dark">edit</a>
+                                    </td>
+
+                                </tr>
+                            {% else %}
+                                <tr>
+                                    <td colspan="17">no records found</td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+
+
+                    </h3>
+                </div>
+            </div>
+        </div>
+        <!-- ============================================================== -->
+{% endblock %}

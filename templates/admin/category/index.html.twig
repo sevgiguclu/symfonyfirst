@@ -1,0 +1,59 @@
+{% extends 'adminbase.html.twig' %}
+
+{% block title %}Category Home Page{% endblock %}
+
+{% block body %}
+    <!-- ============================================================== -->
+    <!-- wrapper  -->
+    <!-- ============================================================== -->
+    <div class="dashboard-wrapper">
+    <div class="container-fluid dashboard-content">
+        <div class="row">
+            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                <h3 class="text-center">
+
+                    <h1>Category List</h1>
+                    <a href="{{ path('category_new') }}" class="btn btn-rounded btn-dark">Create new</a>
+                    <table class="table table-striped">
+                        <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>Parentid</th>
+                            <th>Title</th>
+                            <th>Keywords</th>
+                            <th>Description</th>
+                            <th>Image</th>
+                            <th>Status</th>
+                            <th></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for category in categories %}
+                            <tr>
+                                <td>{{ category.id }}</td>
+                                <td>{{ category.parentid }}</td>
+                                <td>{{ category.title }}</td>
+                                <td>{{ category.keywords }}</td>
+                                <td>{{ category.description }}</td>
+                                <td>{{ category.image }}</td>
+                                <td>{{ category.status }}</td>
+                                <td>
+                                    <a href="{{ path('category_show', {'id': category.id}) }}" class="btn btn-rounded btn-dark">show</a>
+                                    <a href="{{ path('category_edit', {'id': category.id}) }}" class="btn btn-rounded btn-dark">edit</a>
+                                </td>
+                            </tr>
+                        {% else %}
+                            <tr>
+                                <td colspan="10">no records found</td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+
+
+                </h3>
+            </div>
+        </div>
+    </div>
+    <!-- ============================================================== -->
+{% endblock %}
